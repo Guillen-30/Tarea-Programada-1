@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        #table-div {
+        width: 100%;
+        overflow: auto;
+
+        }
+        #table-wrapper {
+        position:relative;
+        background:rgb(177, 202, 255);
+        margin-left: 5%;
+        margin-right: 5%;
+        border: 2px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+        }
+        #table-scroll {
+        position: relative;
+        max-height: 540px;
+        overflow:auto;  
+        margin-top:20px;
+        }
+        #table-wrapper table {
+        margin-left: 5%;
+        margin-right: 5%;
+        width:90%;
+
+        }
+        #table-wrapper table * {
+        background:rgb(212, 223, 247);
+        color:black;
+        
+        }
+        #table-wrapper table thead th .text {
+        position:absolute;   
+        top:-20px;
+        z-index:2;
+        height:20px;
+        width:35%;
+        border:1px solid red;
+        }
+        #button-div {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1{
+            text-align: center;
+            font-size: 70px;
+            font-weight: 600;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                    <!-- Employee data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="button-div">
+        <button onclick="window.location.href='insert.html'">Insert Employee </button>
+    </div>
+    <script>
+        // Example employee data (this can be replaced with data from a server or API)
+        const employees = [
+            { id: 1, name: 'John Doe', salary: 50000 },
+            { id: 2, name: 'Jane Smith', salary: 60000 },
+            { id: 3, name: 'Alice Johnson', salary: 55000 },
+            { id: 4, name: 'John Doe', salary: 50000 },
+            { id: 5, name: 'Jane Smith', salary: 60000 },
+            { id: 6, name: 'Alice Johnson', salary: 55000 },
+            { id: 7, name: 'John Doe', salary: 50000 },
+            { id: 8, name: 'Jane Smith', salary: 60000 },
+            { id: 9, name: 'Alice Johnson', salary: 55000 },
+            { id: 10, name: 'John Doe', salary: 50000 },
+            { id: 11, name: 'Jane Smith', salary: 60000 },
+            { id: 12, name: 'Alice Johnson', salary: 55000 },
+            { id: 13, name: 'John Doe', salary: 50000 },
+            { id: 14, name: 'Jane Smith', salary: 60000 },
+            { id: 15, name: 'Alice Johnson', salary: 55000 },
+            { id: 16, name: 'John Doe', salary: 50000 },
+            { id: 17, name: 'Jane Smith', salary: 60000 },
+            { id: 18, name: 'Alice Johnson', salary: 55000 },
+            
+        ];
+
+        function loadEmployees() {
+            const tableBody = document.getElementById('employeeTableBody');
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = employee.id;
+                row.appendChild(idCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = employee.name;
+                row.appendChild(nameCell);
+
+                const salaryCell = document.createElement('td');
+                salaryCell.textContent = employee.salary;
+                row.appendChild(salaryCell);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Load the employee data when the page loads
+        window.onload = loadEmployees;
+    </script>
+</body>
+</html>
