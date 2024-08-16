@@ -20,6 +20,7 @@ sql_query = "EXEC SeleccionarEmpleados"
 engine = conexion_sql_server()
 df = select_to_df(sql_query, engine)
 if df is not None:
+    df_sorted = df.sort_values(by='Nombre', ascending=True)
     print(df.to_json())
     print(type(df.to_dict(orient='records')))
 else:
@@ -33,8 +34,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def post_data():
     # Convert the DataFrame to a dictionary so it can be easily serialized to JSON
     df = select_to_df(sql_query, engine)
-    
-    data = df.to_dict(orient='records')
+    df_sorted = df.sort_values(by='Nombre', ascending=True)
+    data = df_sorted.to_dict(orient='records')
     print(f"Received data: {data}")
     
     # Return a response
