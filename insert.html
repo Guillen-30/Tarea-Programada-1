@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert Employee</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
         h1 {
             font-family: 'Roboto', sans-serif;
             text-align: center;
@@ -77,23 +84,58 @@
             <button type="button" onclick="window.location.href='index.html'">Go Back</button>
         </form>
         
-
         <script>
             document.getElementById('employeeForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+            event.preventDefault();
 
-                const name = document.getElementById('name').value;
-                const salary = document.getElementById('salary').value;
+            const name = document.getElementById('name').value;
+            const salary = parseInt(document.getElementById('salary').value);
 
-                if (name && salary) {
-                    // Logic to add the new employee (e.g., sending data to the server)
-                    console.log('New Employee:', { name, salary });
+            // Validate name (only alphabetic characters and hyphens)
+            var namePattern = /^[a-zA-Z\s]*$/;
+            if (!namePattern.test(name)) {
+                Swal.fire("Error", "Nombre de empleado solo puede contener caracteres alfabéticos y guiones.", "error");
+                return;
+            }
 
-                    // Redirect back to the employee list page
-                    window.location.href = 'index.html';
+            // Validate salary (even numbers between 350000 and 5000000)
+            if (salary < 350000 || salary > 5000000 || salary % 2 !== 0) {
+
+                Swal.fire("Error", "Salario debe ser un número par entre 350000 y 5000000.", "error");
+                return;
+            }
+
+            // Log the data to the console
+            console.log('New Employee:', { name, salary });
+
+            // Send a POST request to the server
+            fetch('http://127.0.0.1:5000/insert-employee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, salary }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                    Swal.fire("Error", "Nombre de empleado ya existe", "error");
+                } else {
+                    console.log('Success:', data);
+                    Swal.fire("Success", "Empleado insertado correctamente", "success");
+                    Swal.fire("Success", "Empleado insertado correctamente", "success").then((result) => {window.location.href = 'index.html'});
+                    
+                    
                 }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                Swal.fire("Error", "Error al insertar empleado", "error");
             });
+        });
+
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </div>
 </html>
