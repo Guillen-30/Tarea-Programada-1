@@ -13,7 +13,7 @@ def select_to_df(sql_query, engine, params=None):
         df = pd.read_sql(sql_query, engine, params=params)
     except Exception as e:
         print(f"ERROR: {e}")
-    return df
+    return
 
 # Modify the SQL query to call the stored procedure
 sql_query = "EXEC SeleccionarEmpleados"
