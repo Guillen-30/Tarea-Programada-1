@@ -1,164 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee List</title>
+    <title>Lista de Empleados</title>
     <style>
-        #table-div {
-            width: 100%;
-            overflow: auto;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #34344e;
+        }
+
         #table-wrapper {
-            position: relative;
-            background: #b1caff;
-            margin-left: 5%;
-            margin-right: 5%;
-            border: 2px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         #table-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #34344e;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #f1f3f5;
+            color: #212529;
+        }
+
+        button {
+            display: inline-block;
+            padding: 0.9rem 1.8rem;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            border: 3px solid #f8f9fa;
+            cursor: pointer;
             position: relative;
-            max-height: 540px;
-            overflow: auto;
-            margin-top: 20px;
+            background-color: #34344e;
+            text-decoration: none;
+            overflow: hidden;
+            z-index: 1;
+            font-family: inherit;
+            margin: 20px;
         }
-        #table-wrapper table {
-            margin-left: 5%;
-            margin-right: 5%;
-            width: 90%;
-        }
-        #table-wrapper table * {
-            background: rgb(212, 223, 247);
-            color: black;
-        }
-        #table-wrapper table thead th .text {
+
+        button::before {
+            content: "";
             position: absolute;
-            top: -20px;
-            z-index: 2;
-            height: 20px;
-            width: 35%;
-            border: 1px solid red;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            background-color: #f8f9fa;
+            transform: translateX(-100%);
+            transition: all .3s;
+            z-index: -1;
         }
+
+        button:hover::before {
+            transform: translateX(0);
+        }
+
+        button:hover {
+            color: #34344e;
+        }
+
+        .table-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        #reloadButton {
+            padding: 10px;
+            font-size: 24px;
+            background-color: #f8f9fa;
+            border: none;
+            color: #34344e;
+            cursor: pointer;
+            margin-right: 20px;
+            width: 40px;
+            height: 50px;
+        }
+
+        #reloadButton:hover {
+            color: #34344e;
+        }
+
+
         #button-div {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
-            gap: 10px; /* Added to space out the buttons */
+            width: 100%;
+            margin-top: 20px;
         }
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-family: 'Roboto', sans-serif;
+
+        #table-scroll::-webkit-scrollbar {
+            width: 8px;
         }
-        table, th, td {
-            border: 1px solid black;
+
+        #table-scroll::-webkit-scrollbar-thumb {
+            background-color: #89a7b1;
+            border-radius: 8px;
         }
-        th, td {
-            padding: 8px;
-            text-align: left;
+
+        #table-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #566981;
         }
-        th {
-            background-color: #f2f2f2;
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            th,
+            td {
+                padding: 12px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            #reloadButton {
+                font-size: 20px;
+            }
+            .divisor-forma-personalizado svg {
+                height: 105px;
+            }
         }
-        button {
-            align-items: center;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+
+            button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            #reloadButton {
+                font-size: 18px;
+            } 
         }
-            
-        button:active {
-            background-color: #7d7d7e; /* Background color when pressed */
-            color: white; /* Text color when pressed */
+        .divisor-forma-personalizado {
+            position: fixed;
+            transform: rotate(180deg);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: -1;
         }
-        #reloadButton {
-            align-items: center;
-            padding: 0px 2px;
-            font-size: 20px;
-            border: 2px solid #00000000;
-            background-color: #00000000;
+
+        .divisor-forma-personalizado svg {
+            display: block;
+            width: 100%;
+            height: 405px;
         }
-            
-        #reloadButton:active {
-            background-color: #7d7d7e00; /* Background color when pressed */
-            color: white; /* Text color when pressed */
+
+        .divisor-forma-personalizado .relleno-forma {
+            fill: #34344e;
         }
-        h1 {
-            text-align: center;
-            font-size: 70px;
-            font-weight: 600;
-            font-family: 'Roboto', sans-serif;
-        }
+
     </style>
 </head>
+
 <body>
-    <h1>Employee List</h1>
+    <div class="table-header">
+        <h1>Lista de Empleados</h1>
+    </div>
+    <div id="button-div">
+        <button id="reloadButton" onclick="recargarPagina()">↻</button>
+        <button onclick="window.location.href='insert.html'">Insertar Empleado</button>
+    </div>
     <div id="table-wrapper">
-        <button id="reloadButton" onclick="reloadPage()">↻</button>
         <div id="table-scroll">
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Salary</th>
+                        <th>Nombre</th>
+                        <th>Salario</th>
                     </tr>
                 </thead>
                 <tbody id="employeeTableBody">
-                    <!-- Employee data will be dynamically inserted here -->
+                    <!-- Datos de la tabla -->
                 </tbody>
             </table>
         </div>
     </div>
-    <div id="button-div">
-        <button onclick="window.location.href='insert.html'">Insert Employee</button>
+    <div class="divisor-forma-personalizado">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                class="relleno-forma"></path>
+        </svg>
     </div>
     <script>
-        function loadEmployees(data) {
+        function cargarEmpleados(datos) {
             const tableBody = document.getElementById('employeeTableBody');
-            tableBody.innerHTML = ''; // Clear existing data
-            data.forEach(employee => {
+            tableBody.innerHTML = ''; // Limpiar los datos existentes
+            datos.forEach(empleado => {
                 const row = document.createElement('tr');
 
                 const idCell = document.createElement('td');
-                idCell.textContent = employee.id;
+                idCell.textContent = empleado.id;
                 row.appendChild(idCell);
 
                 const nameCell = document.createElement('td');
-                nameCell.textContent = employee.Nombre;
+                nameCell.textContent = empleado.Nombre;
                 row.appendChild(nameCell);
 
                 const salaryCell = document.createElement('td');
-                salaryCell.textContent = employee.Salario;
+                salaryCell.textContent = empleado.Salario+'.00₡';
                 row.appendChild(salaryCell);
 
                 tableBody.appendChild(row);
             });
         }
 
-        function reloadPage() {
-            console.log('Reloading page...');
+        function recargarPagina() {
+            console.log('Recargando la página...');
             fetch('http://127.0.0.1:5000/post-data')
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        throw new Error('La respuesta de la red no fue exitosa');
                     }
                     return response.json();
                 })
-                .then(data => {
-                    console.log('Response:', data);
-                    loadEmployees(data.data_received); // Cargar los datos recibidos
+                .then(datos => {
+                    console.log('Respuesta:', datos);
+                    cargarEmpleados(datos.data_received); // Cargar los datos recibidos
                 })
                 .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
+                    console.error('Hubo un problema con la operación de fetch:', error);
                 });
         }
 
-        // Load the employee data when the page loads
-        window.onload = () => reloadPage();
+        // Cargar los datos de los empleados cuando la página se cargue
+        window.onload = () => recargarPagina();
     </script>
 </body>
+
 </html>
