@@ -1,114 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Employee</title>
+    <title>Insertar Empleado</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            font-family: 'Roboto', sans-serif;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 300px;
+            background-color: #f8f9fa;
+            color: #212529;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        label{
-            font-family: 'Roboto', sans-serif;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        input, button {
-            margin: 10px 0;
-        }
-
-        input {
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        button {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-left: 100px;
-            margin-right: 100px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        button:active {
-            background-color: #7d7d7e; /* Background color when pressed */
-            color: white; /* Text color when pressed */
-        }
         #container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid #ccc;
+            border: 1px solid #dee2e6;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #abbdf0;
-            margin-top: 200px;
-            margin-bottom: 200px;
-            margin-left: 700px;
-            margin-right: 700px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            max-width: 400px;
+            width: 100%;
+            margin: 200px auto 0px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #goBackButton {
+            width: 160px;
+            height: 50px;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #34344e;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        #goBackButton:hover {
+            color: #ffffff;
+            background-color: #1c1c29;
+        }
+
+        #goBackButton:active {
+            background-color: #34344e;
+        }
+        
+        #insertButton {
+            width: 160px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background: #34344e;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+            background: #34344e;
+        }
+
+            #insertButton,
+            button span {
+            transition: 200ms;
+        }
+
+            #insertButton .text {
+            transform: translateX(35px);
+            color: white;
+            font-weight: bold;
+        }
+
+            #insertButton .icon {
+            position: absolute;
+            border-left: 1px solid #34344e;
+            transform: translateX(110px);
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            #insertButton svg {
+            width: 15px;
+            fill: #eee;
+        }
+
+            #insertButton:hover {
+            background: #34344e;
+        }
+
+            #insertButton:active {
+            background: #34344e;
+        }
+
+            #insertButton:hover .text {
+            color: transparent;
+        }
+
+            #insertButton:hover .icon {
+            width: 150px;
+            border-left: none;
+            transform: translateX(0);
+        }
+
+            #insertButton:focus {
+            outline: none;
+        }
+
+            #insertButton:active .icon svg {
+            transform: scale(0.8);
+        }
+
+        .buttonSpan {
+
+            color: white;
+            margin: 150px;
+            font-size: 30px;
+        }
+        #goBackButton {
+            background-color: #f3f3f3;
+            color: #34344e;
+        }
+
+        #goBackButton:hover {
+            color: #34344e;
+            background-color: #cecece;
+        }
+        .buttons{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            input,
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+        input {
+            border: none;
+            border-bottom: 3px solid; 
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none; ;
+        }
+        input:focus {
+            border-bottom-color: #566981; 
+        }
+        .divisor-forma-personalizado {
+            position: fixed;
+            transform: rotate(180deg);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: -1;
+        }
+
+        .divisor-forma-personalizado svg {
+            display: block;
+            width: 100%;
+            height: 405px;
+        }
+
+        .divisor-forma-personalizado .relleno-forma {
+            fill: #34344e;
         }
     </style>
 </head>
-<div id="container">
-    <body>
-        <h1>Insert Employee</h1>
+
+<body>
+    <div id="container">
+        <h1>Insertar Empleado</h1>
         <form id="employeeForm">
-            <label for="name">Name:</label>
+            <label for="name">Nombre</label>
             <input type="text" id="name" name="name" required>
-
-            <label for="salary">Salary:</label>
+            <label for="salary">Salario</label>
             <input type="number" id="salary" name="salary" required>
-
-            <button type="submit">Insert</button>
-            <button type="button" onclick="window.location.href='index.html'">Go Back</button>
+            <div class="buttons">
+                <button id="goBackButton" type="button" onclick="window.location.href='index.html'">Volver</button>
+                <button id="insertButton" type="submit" class="noselect">
+                    <span class="text">Insertar</span><span class="icon"><svg viewBox="0 0 24 24" height="24" width="24"
+                            xmlns="http://www.w3.org/2000/svg"></svg><span class="buttonSpan">+</span></span>
+                </button>
+            </div>
         </form>
-        
-        <script>
-            document.getElementById('employeeForm').addEventListener('submit', function(event) {
+    </div>
+    <div class="divisor-forma-personalizado">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                class="relleno-forma"></path>
+        </svg>
+    </div>
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
             const name = document.getElementById('name').value;
             const salary = parseInt(document.getElementById('salary').value);
 
-            // Validate name (only alphabetic characters and hyphens)
+            // Validar nombre (solo caracteres alfabéticos y guiones)
             var namePattern = /^[a-zA-Z\s]*$/;
             if (!namePattern.test(name)) {
-                Swal.fire("Error", "Nombre de empleado solo puede contener caracteres alfabéticos y guiones.", "error");
+                Swal.fire("Error", "El nombre del empleado solo puede contener caracteres alfabéticos y guiones.", "error");
                 return;
             }
 
-            // Validate salary (even numbers between 350000 and 5000000)
+            // Validar salario (números pares entre 350000 y 5000000)
             if (salary < 350000 || salary > 5000000 || salary % 2 !== 0) {
-
-                Swal.fire("Error", "Salario debe ser un número par entre 350000 y 5000000.", "error");
+                Swal.fire("Error", "El salario debe ser un número par entre 350000 y 5000000.", "error");
                 return;
             }
 
-            // Log the data to the console
-            console.log('New Employee:', { name, salary });
+            // Mostrar los datos en la consola
+            console.log('Nuevo Empleado:', { name, salary });
 
-            // Send a POST request to the server
+            // Enviar una solicitud POST al servidor
             fetch('http://127.0.0.1:5000/insert-employee', {
                 method: 'POST',
                 headers: {
@@ -116,26 +270,24 @@
                 },
                 body: JSON.stringify({ name, salary }),
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'error') {
-                    Swal.fire("Error", "Nombre de empleado ya existe", "error");
-                } else {
-                    console.log('Success:', data);
-                    Swal.fire("Success", "Empleado insertado correctamente", "success");
-                    Swal.fire("Success", "Empleado insertado correctamente", "success").then((result) => {window.location.href = 'index.html'});
-                    
-                    
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                Swal.fire("Error", "Error al insertar empleado", "error");
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error') {
+                        Swal.fire("Error", "El nombre del empleado ya existe", "error");
+                    } else {
+                        console.log('Éxito:', data);
+                        Swal.fire("Éxito", "Empleado insertado correctamente", "success").then((result) => {
+                            window.location.href = 'index.html';
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    Swal.fire("Error", "Error al insertar empleado", "error");
+                });
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
 
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </body>
-</div>
 </html>
