@@ -272,13 +272,19 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    console.log("data",data)
                     if (data.status === 'error') {
-                        Swal.fire("Error", "El nombre del empleado ya existe", "error");
+                        
+                        if (data.message === "El nombre debe ser un string de al menos 3 caracteres y no debe contener números.") {
+                            console.log('Éxito:', data);
+                            Swal.fire("Error", "El nombre del empleado debe ser un string de al menos 3 caracteres y no debe contener números", "error");
+                        }
+                        else{
+                            Swal.fire("Error", "El nombre del empleado ya existe", "error");
+                        }
                     } else {
                         console.log('Éxito:', data);
-                        Swal.fire("Éxito", "Empleado insertado correctamente", "success").then((result) => {
-                            window.location.href = 'index.html';
-                        });
+                        Swal.fire("Éxito", "Empleado insertado correctamente", "success");
                     }
                 })
                 .catch((error) => {
